@@ -1,23 +1,12 @@
-def get_title(html):
-    pass
+#from pyquery import PyQuery
 
-def get_author(html):
-    pass
-
-def get_price(html):
-    pass
-
-def get_shipping_weight(html):
-    pass
-
-def get_isbn(html):
-    pass
+from parse_utils import build_query_func
 
 
 things_to_pull = {
-    "title": get_title,
-    "author": get_author,
-    "price": get_price,
-    "shipping_weight": get_shipping_weight,
-    "isbn-10": get_isbn,
+    "title": build_query_func("#btAsinTitle"),
+    "author": build_query_func("div.buying > span > a"),
+    "price":  build_query_func("b.priceLarge"),
+    "shipping_weight": build_query_func("#productDetailsTable li:contains('Shipping Weight')"),
+    "isbn-10": build_query_func("#productDetailsTable li:contains('ISBN-10')"),  # seems to be a bug in the contains implementation
 }
